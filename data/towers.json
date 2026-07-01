@@ -1,0 +1,28 @@
+{
+    "basic": {
+        "damage": 5,
+        "range": 150,
+        "fire_rate": 30,
+        "cost": 25,
+        "color": [50,100,255],
+        "size": 24
+    },
+
+    "sniper": {
+        "damage": 25,
+        "range": 320,
+        "fire_rate": 120,
+        "cost": 75,
+        "color": [255,255,80],
+        "size": 24
+    },
+
+    "machine": {
+        "damage": 2,
+        "range": 120,
+        "fire_rate": 8,
+        "cost": 60,
+        "color": [255,80,80],
+        "size": 32
+    }
+}

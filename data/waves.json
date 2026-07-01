@@ -1,0 +1,61 @@
+[
+    {
+        "enemies": [
+            "basic","basic","basic","basic","basic"
+        ]
+    },
+
+    {
+        "enemies": [
+            "basic","basic","fast","basic","fast","basic"
+        ]
+    },
+
+    {
+        "enemies": [
+            "fast","fast","fast","basic","basic","fast"
+        ]
+    },
+
+    {
+        "enemies": [
+            "tank","basic","basic","fast","fast"
+        ]
+    },
+
+    {
+        "enemies": [
+            "tank","tank","basic","fast","fast","fast"
+        ]
+    },
+
+    {
+        "enemies": [
+            "runner","runner","runner","runner","fast","fast"
+        ]
+    },
+
+    {
+        "enemies": [
+            "tank","runner","runner","basic","tank"
+        ]
+    },
+
+    {
+        "enemies": [
+            "tank","tank","runner","runner","fast","fast","basic"
+        ]
+    },
+
+    {
+        "enemies": [
+            "tank","tank","tank","runner","runner","fast"
+        ]
+    },
+
+    {
+        "enemies": [
+            "boss"
+        ]
+    }
+]
