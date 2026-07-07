@@ -1,6 +1,6 @@
 {
     "basic": {
-        "damage": 5,
+        "damage": 7,
         "range": 150,
         "fire_rate": 30,
         "cost": 25,
@@ -9,7 +9,7 @@
     },
 
     "sniper": {
-        "damage": 25,
+        "damage": 50,
         "range": 320,
         "fire_rate": 120,
         "cost": 75,
@@ -18,7 +18,7 @@
     },
 
     "machine": {
-        "damage": 2,
+        "damage": 4,
         "range": 120,
         "fire_rate": 8,
         "cost": 60,

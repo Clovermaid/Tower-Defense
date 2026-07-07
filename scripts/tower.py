@@ -13,6 +13,7 @@ class Tower:
         self.size = stats["size"]
         self.color = stats["color"]
         self.cost = stats["cost"]
+        self.target = None
 
         self.cooldown = 0
 
@@ -20,32 +21,41 @@ class Tower:
         if self.cooldown > 0:
             self.cooldown -= 1
 
-        if len(enemies) == 0:
-            return
+        # 1. If target died or left the game, clear it
+        if self.target not in enemies:
+            self.target = None
 
-        closest_enemy = None
-        closest_distance = float("inf")
-
-        # Centre of the tower
         tower_x = self.x + self.size // 2
         tower_y = self.y + self.size // 2
+        range_sq = self.range ** 2
 
-        for enemy in enemies:
-            dx = enemy.x - tower_x
-            dy = enemy.y - tower_y
-            distance = (dx ** 2 + dy ** 2) ** 0.5
+        # 2. Check if current target is still in range
+        if self.target:
+            dx = self.target.x - tower_x
+            dy = self.target.y - tower_y
+            if (dx ** 2 + dy ** 2) > range_sq:
+                self.target = None # Out of range, drop target
 
-            if distance < closest_distance:
-                closest_distance = distance
-                closest_enemy = enemy
+        # 3. ONLY scan the enemy list if we need a new target (O(1) most frames!)
+        if not self.target and len(enemies) > 0:
+            closest_dist_sq = float("inf")
+            for enemy in enemies:
+                dx = enemy.x - tower_x
+                dy = enemy.y - tower_y
+                dist_sq = dx ** 2 + dy ** 2
 
-        if (
-            closest_enemy
-            and closest_distance <= self.range
-            and self.cooldown == 0
-        ):
-            bullets.append(Bullet(tower_x, tower_y, closest_enemy, self.damage))
-            self.cooldown = self.fire_rate
+                if dist_sq < closest_dist_sq:
+                    closest_dist_sq = dist_sq
+                    self.target = enemy
+
+        # 4. Attack the locked target
+        if self.target and self.cooldown == 0:
+            # Double check distance one last time before firing
+            dx = self.target.x - tower_x
+            dy = self.target.y - tower_y
+            if (dx ** 2 + dy ** 2) <= range_sq:
+                bullets.append(Bullet(tower_x, tower_y, self.target, self.damage))
+                self.cooldown = self.fire_rate
 
     def draw(self, screen):
         screen.blit(

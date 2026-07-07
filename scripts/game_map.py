@@ -45,19 +45,22 @@ class GameMap:
                     self.path.append((x, y))
 
     def draw(self, screen):
-
         for row in range(len(self.tiles)):
             for col in range(len(self.tiles[row])):
-
                 tile = self.tiles[row][col]
 
                 x = col * self.tile_size
                 y = row * self.tile_size + settings.UI_HEIGHT
 
-                sprite_name = TILES[tile]["sprite"]
-                sprite = sprites.TILES[sprite_name]
+                # Safe structural dictionary lookup fallback
+                tile_info = TILES.get(tile, {"sprite": "grass"})
+                sprite_name = tile_info["sprite"]
+                
+                # Fetch asset handle from sprite repository safely
+                sprite = sprites.TILES.get(sprite_name, sprites.TILES["grass"])
 
                 screen.blit(sprite, (x, y))
+
 
     def can_build(self, x, y):
 
